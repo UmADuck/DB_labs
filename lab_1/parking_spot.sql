@@ -1,0 +1,1 @@
+SELECT * FROM korol_iot_14.parking_spot;
