@@ -9,6 +9,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 @Component
 public class ParkingTicketDtoAssembler implements RepresentationModelAssembler<ParkingTicket, ParkingTicketDto> {
 
@@ -19,7 +21,7 @@ public class ParkingTicketDtoAssembler implements RepresentationModelAssembler<P
                 .id(entity.getId())
                 .parkedCarNumberPlates(entity.getParkedCarNumberPlate())
                 .build();
-        Link selfLink = linkTo(methodOn(ParkingTicketController.class).getBooking(parkingTicketDto.getId())).withSelfRel();
+        Link selfLink = linkTo(methodOn(ParkingTicketController.class).getParkingTicket(parkingTicketDto.getId())).withSelfRel();
         parkingTicketDto.add(selfLink);
         return parkingTicketDto;
     }
@@ -27,7 +29,7 @@ public class ParkingTicketDtoAssembler implements RepresentationModelAssembler<P
     @Override
     public CollectionModel<ParkingTicketDto> toCollectionModel(Iterable<? extends ParkingTicket> entities) {
         CollectionModel<ParkingTicketDto> parkingTicketDtos = RepresentationModelAssembler.super.toCollectionModel(entities);
-        Link selfLink = linkTo(methodOn(ParkingTicketController.class).getAllBooks()).withSelfRel();
+        Link selfLink = linkTo(methodOn(ParkingTicketController.class).getAllParkingTickets()).withSelfRel();
         parkingTicketDtos.add(selfLink);
         return parkingTicketDtos;
     }

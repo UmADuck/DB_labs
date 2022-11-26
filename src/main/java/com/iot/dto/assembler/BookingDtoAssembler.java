@@ -9,6 +9,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 @Component
 public class BookingDtoAssembler implements RepresentationModelAssembler<Booking, BookingDto> {
 

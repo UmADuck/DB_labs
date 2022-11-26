@@ -9,6 +9,9 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+
 @Component
 public class CompanyCardDtoAssembler implements RepresentationModelAssembler<CompanyCard, CompanyCardDto> {
     @Override
@@ -17,7 +20,7 @@ public class CompanyCardDtoAssembler implements RepresentationModelAssembler<Com
                 .id(entity.getId())
                 .companyName(entity.getCompanyName())
                 .build();
-        Link selfLink = linkTo(methodOn(CompanyCardController.class).getBook(companyCardDto.getId())).withSelfRel();
+        Link selfLink = linkTo(methodOn(CompanyCardController.class).getCompanyCard(companyCardDto.getId())).withSelfRel();
         companyCardDto.add(selfLink);
         return companyCardDto;
     }
@@ -25,7 +28,7 @@ public class CompanyCardDtoAssembler implements RepresentationModelAssembler<Com
     @Override
     public CollectionModel<CompanyCardDto> toCollectionModel(Iterable<? extends CompanyCard> entities) {
         CollectionModel<CompanyCardDto> companyCardDtos = RepresentationModelAssembler.super.toCollectionModel(entities);
-        Link selfLink = linkTo(methodOn(CompanyCardController.class).getAllBooks()).withSelfRel();
+        Link selfLink = linkTo(methodOn(CompanyCardController.class).getAllCompanyCards()).withSelfRel();
         companyCardDtos.add(selfLink);
         return companyCardDtos;
     }

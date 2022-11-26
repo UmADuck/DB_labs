@@ -9,6 +9,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 @Component
 public class CustomerCardDtoAssembler implements RepresentationModelAssembler<CustomerCard, CustomerCardDto> {
     @Override
@@ -18,7 +20,7 @@ public class CustomerCardDtoAssembler implements RepresentationModelAssembler<Cu
                 .customerName(entity.getCustomerName())
                 .customerName(entity.getCustomerName())
                 .build();
-        Link selfLink = linkTo(methodOn(CustomerCardController.class).getBook(customerCardDto.getId())).withSelfRel();
+        Link selfLink = linkTo(methodOn(CustomerCardController.class).getCustomerCard(customerCardDto.getId())).withSelfRel();
         customerCardDto.add(selfLink);
         return customerCardDto;
     }
@@ -26,7 +28,7 @@ public class CustomerCardDtoAssembler implements RepresentationModelAssembler<Cu
     @Override
     public CollectionModel<CustomerCardDto> toCollectionModel(Iterable<? extends CustomerCard> entities) {
         CollectionModel<CustomerCardDto> customerCardDtos = RepresentationModelAssembler.super.toCollectionModel(entities);
-        Link selfLink = linkTo(methodOn(CustomerCardController.class).getAllBooks()).withSelfRel();
+        Link selfLink = linkTo(methodOn(CustomerCardController.class).getAllCustomerCards()).withSelfRel();
         customerCardDtos.add(selfLink);
         return customerCardDtos;
     }
